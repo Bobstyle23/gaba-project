@@ -9,10 +9,12 @@ import {
   Td,
 } from "@chakra-ui/react";
 import useUsers from "../hooks/useUsers";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Users() {
   const { data, isLoading, error, hasNextPage, fetchNextPage } = useUsers();
+
+  const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
 
@@ -34,15 +36,17 @@ function Users() {
         </Thead>
         <Tbody>
           {users.map((user) => (
-            <Link to={`/users/${user.id}`}>
-              <Tr key={user.id}>
-                <Td>{user.id}</Td>
-                <Td>{user.firstName}</Td>
-                <Td>{user.lastName}</Td>
-                <Td>{user.email}</Td>
-                <Td>{user.phone}</Td>
-              </Tr>
-            </Link>
+            <Tr
+              key={user.id}
+              onClick={() => navigate(`/users/${user.id}`)}
+              _hover={{ cursor: "pointer" }}
+            >
+              <Td>{user.id}</Td>
+              <Td>{user.firstName}</Td>
+              <Td>{user.lastName}</Td>
+              <Td>{user.email}</Td>
+              <Td>{user.phone}</Td>
+            </Tr>
           ))}
         </Tbody>
       </Table>
