@@ -19,6 +19,7 @@ function useUsers(page: number) {
       }),
     keepPreviousData: true,
     staleTime: ms("24h"),
+    retry: 2,
   });
 }
 
