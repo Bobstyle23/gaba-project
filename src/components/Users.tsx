@@ -31,14 +31,14 @@ function Users() {
 
   return (
     <>
-      <TableContainer>
-        <Table variant="simple">
+      <TableContainer overflowX="auto">
+        <Table variant="striped">
           <Thead>
             <Tr>
-              <Th>ID</Th>
+              <Th display={{ base: "none", md: "table-cell" }}>ID</Th>
               <Th>First Name</Th>
               <Th>Last Name</Th>
-              <Th>Email</Th>
+              <Th display={{ base: "none", md: "table-cell" }}>Email</Th>
               <Th>Phone</Th>
             </Tr>
           </Thead>
@@ -49,10 +49,12 @@ function Users() {
                 onClick={() => navigate(`/users/${user.id}`)}
                 _hover={{ cursor: "pointer" }}
               >
-                <Td>{user.id}</Td>
+                <Td display={{ base: "none", md: "table-cell" }}>{user.id}</Td>
                 <Td>{user.firstName}</Td>
                 <Td>{user.lastName}</Td>
-                <Td>{user.email}</Td>
+                <Td display={{ base: "none", md: "table-cell" }}>
+                  {user.email}
+                </Td>
                 <Td>{user.phone}</Td>
               </Tr>
             ))}
