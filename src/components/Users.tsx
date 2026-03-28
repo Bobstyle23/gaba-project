@@ -1,5 +1,4 @@
 import {
-  Spinner,
   Table,
   TableContainer,
   Th,
@@ -10,24 +9,18 @@ import {
   HStack,
   Button,
 } from "@chakra-ui/react";
-import useUsers, { LIMIT } from "../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import type { User } from "../entities/User";
 
-function Users() {
-  const [page, setPage] = useState<number>(1);
-  const { data, isLoading, error } = useUsers(page);
+interface Props {
+  users: User[];
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  totalPages: number;
+}
 
+function Users({ users, page, setPage, totalPages }: Props) {
   const navigate = useNavigate();
-
-  if (isLoading) return <Spinner margin={5} />;
-
-  if (error) throw error;
-
-  const users = data.users ?? [];
-  const total = data.total ?? 0;
-
-  const totalPages = Math.ceil(total / LIMIT);
 
   return (
     <>
