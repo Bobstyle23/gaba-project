@@ -20,7 +20,7 @@ function Users() {
 
   const navigate = useNavigate();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner margin={5} />;
 
   if (error) throw error;
 

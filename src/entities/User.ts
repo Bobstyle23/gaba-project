@@ -1,3 +1,6 @@
+import type { Address } from "./Address";
+import type { Company } from "./Company";
+
 export interface User {
   id: number;
   firstName: string;
@@ -8,8 +11,8 @@ export interface User {
   age: number;
   gender: string;
   birthDate: string;
-  country: string;
-  job: string;
+  address: Address;
+  job: Company;
   username: string;
   height: number;
   weight: number;
