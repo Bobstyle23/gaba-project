@@ -12,7 +12,7 @@ export interface User {
   gender: string;
   birthDate: string;
   address: Address;
-  job: Company;
+  company: Company;
   username: string;
   height: number;
   weight: number;
