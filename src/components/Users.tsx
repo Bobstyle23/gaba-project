@@ -10,7 +10,7 @@ import {
   HStack,
   Button,
 } from "@chakra-ui/react";
-import useUsers from "../hooks/useUsers";
+import useUsers, { LIMIT } from "../hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -26,8 +26,6 @@ function Users() {
 
   const users = data.users ?? [];
   const total = data.total ?? 0;
-
-  const LIMIT = 10;
 
   const totalPages = Math.ceil(total / LIMIT);
 
