@@ -10,17 +10,18 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import useUsersStore from "../stores/userQueryStore";
 import type { User } from "../entities/User";
 
 interface Props {
   users: User[];
-  page: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
   totalPages: number;
 }
 
-function Users({ users, page, setPage, totalPages }: Props) {
+function Users({ users, totalPages }: Props) {
   const navigate = useNavigate();
+
+  const { page, nextPage, prevPage } = useUsersStore();
 
   return (
     <>
@@ -55,17 +56,11 @@ function Users({ users, page, setPage, totalPages }: Props) {
         </Table>
       </TableContainer>
       <HStack mt={4} justifyContent={"center"}>
-        <Button
-          onClick={() => setPage((page) => Math.max(page - 1, 1))}
-          isDisabled={page == 1}
-        >
+        <Button onClick={prevPage} isDisabled={page == 1}>
           Previous
         </Button>
 
-        <Button
-          onClick={() => setPage((page) => Math.min(page + 1, totalPages))}
-          isDisabled={page == totalPages}
-        >
+        <Button onClick={nextPage} isDisabled={page == totalPages}>
           Next
         </Button>
       </HStack>

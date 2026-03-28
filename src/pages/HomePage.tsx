@@ -1,12 +1,13 @@
 import { Box, Grid, GridItem, Spinner } from "@chakra-ui/react";
 import Users from "../components/Users";
-import { useState } from "react";
 import useUsers, { LIMIT } from "../hooks/useUsers";
+import useUsersStore from "../stores/userQueryStore";
 
 function HomePage() {
-  const [page, setPage] = useState<number>(1);
+  const { page, search } = useUsersStore();
+  // const [page, setPage] = useState<number>(1);
 
-  const { data, isLoading, error } = useUsers(page);
+  const { data, isLoading, error } = useUsers(page, search);
 
   if (isLoading) return <Spinner margin={5} />;
   if (error) throw error;
@@ -28,12 +29,7 @@ function HomePage() {
       >
         <GridItem area="main">
           <Box padding={2}>
-            <Users
-              users={users}
-              page={page}
-              setPage={setPage}
-              totalPages={totalPages}
-            />
+            <Users users={users} totalPages={totalPages} />
           </Box>
         </GridItem>
       </Grid>

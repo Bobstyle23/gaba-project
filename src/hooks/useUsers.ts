@@ -7,16 +7,18 @@ const apiClient = new APIClient<User>("/users");
 
 export const LIMIT = 10;
 
-function useUsers(page: number) {
+function useUsers(page: number, search: string) {
   return useQuery<FetchResponse<User>, Error>({
-    queryKey: ["users", page],
-    queryFn: () =>
-      apiClient.getAllUsers({
+    queryKey: ["users", { page, search }],
+    queryFn: () => {
+      if (search) return apiClient.getUserByName(search);
+      return apiClient.getAllUsers({
         params: {
           limit: LIMIT,
           skip: (page - 1) * LIMIT,
         },
-      }),
+      });
+    },
     keepPreviousData: true,
     staleTime: ms("24h"),
     retry: 2,
