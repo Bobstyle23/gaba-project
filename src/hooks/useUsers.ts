@@ -11,7 +11,7 @@ function useUsers(page: number, search: string) {
   return useQuery<FetchResponse<User>, Error>({
     queryKey: ["users", { page, search }],
     queryFn: () => {
-      if (search) return apiClient.getUserByName(search);
+      if (search.trim()) return apiClient.getUserByName(search);
       return apiClient.getAllUsers({
         params: {
           limit: LIMIT,
