@@ -2,6 +2,7 @@ import { Avatar, Box, useColorModeValue, VStack, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import type { User } from "../entities/User";
 import useUsersStore from "../stores/userQueryStore";
+import EmptyState from "./EmptyState";
 
 interface Props {
   users: User[];
@@ -18,11 +19,7 @@ function MobileUsers({ users }: Props) {
     <VStack spacing={3} align={"stretch"}>
       {isEmpty ? (
         <Box p={4} borderRadius="lg" shadow="sm" borderWidth="1px">
-          {search ? (
-            <Text>No results for "{search}"</Text>
-          ) : (
-            <Text>No users avaiable</Text>
-          )}
+          <EmptyState search={search} />
         </Box>
       ) : (
         users.map((user) => (

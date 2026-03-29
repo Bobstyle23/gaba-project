@@ -11,15 +11,17 @@ function Pagination({ totalPages }: Props) {
   const nextPage = useUsersStore((selector) => selector.nextPage);
 
   return (
-    <HStack mt={4} justifyContent={"center"}>
-      <Button onClick={prevPage} isDisabled={page == 1}>
-        Previous
-      </Button>
+    totalPages > 10 && (
+      <HStack mt={4} justifyContent={"center"}>
+        <Button onClick={prevPage} isDisabled={page == 1}>
+          Previous
+        </Button>
 
-      <Button onClick={nextPage} isDisabled={page == totalPages}>
-        Next
-      </Button>
-    </HStack>
+        <Button onClick={nextPage} isDisabled={page == totalPages}>
+          Next
+        </Button>
+      </HStack>
+    )
   );
 }
 

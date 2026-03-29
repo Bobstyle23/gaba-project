@@ -11,6 +11,7 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import useUsersStore from "../stores/userQueryStore";
+import EmptyState from "./EmptyState";
 
 interface Props {
   users: User[];
@@ -39,7 +40,7 @@ function DesktopTable({ users }: Props) {
           {isEmpty ? (
             <Tr>
               <Td colSpan={6} textAlign={"center"}>
-                {search ? `No results for "${search}"` : "No users available"}
+                <EmptyState search={search} />
               </Td>
             </Tr>
           ) : (
