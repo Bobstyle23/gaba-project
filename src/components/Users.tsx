@@ -21,7 +21,9 @@ interface Props {
 function Users({ users, totalPages }: Props) {
   const navigate = useNavigate();
 
-  const { page, nextPage, prevPage } = useUsersStore();
+  const page = useUsersStore((selector) => selector.page);
+  const nextPage = useUsersStore((selector) => selector.nextPage);
+  const prevPage = useUsersStore((selector) => selector.prevPage);
 
   return (
     <>
