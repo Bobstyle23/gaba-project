@@ -10,7 +10,6 @@ interface Props {
 }
 
 function Users({ users, totalPages }: Props) {
-  const isEmpty = users.length === 0;
   const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
 
   return (

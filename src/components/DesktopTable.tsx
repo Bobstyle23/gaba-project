@@ -10,6 +10,7 @@ import {
   Td,
   Avatar,
 } from "@chakra-ui/react";
+import useUsersStore from "../stores/userQueryStore";
 
 interface Props {
   users: User[];
@@ -17,6 +18,10 @@ interface Props {
 
 function DesktopTable({ users }: Props) {
   const navigate = useNavigate();
+  const search = useUsersStore((selector) => selector.search);
+
+  const isEmpty = users.length === 0;
+
   return (
     <TableContainer overflowX="auto">
       <Table variant="striped">
@@ -31,22 +36,30 @@ function DesktopTable({ users }: Props) {
           </Tr>
         </Thead>
         <Tbody>
-          {users.map((user) => (
-            <Tr
-              key={user.id}
-              onClick={() => navigate(`/users/${user.id}`)}
-              _hover={{ cursor: "pointer" }}
-            >
-              <Td>{user.id}</Td>
-              <Td>
-                <Avatar name={user.firstName} src={user.image} />
+          {isEmpty ? (
+            <Tr>
+              <Td colSpan={6} textAlign={"center"}>
+                {search ? `No results for "${search}"` : "No users available"}
               </Td>
-              <Td>{user.firstName}</Td>
-              <Td>{user.lastName}</Td>
-              <Td>{user.email}</Td>
-              <Td>{user.phone}</Td>
             </Tr>
-          ))}
+          ) : (
+            users.map((user) => (
+              <Tr
+                key={user.id}
+                onClick={() => navigate(`/users/${user.id}`)}
+                _hover={{ cursor: "pointer" }}
+              >
+                <Td>{user.id}</Td>
+                <Td>
+                  <Avatar name={user.firstName} src={user.image} />
+                </Td>
+                <Td>{user.firstName}</Td>
+                <Td>{user.lastName}</Td>
+                <Td>{user.email}</Td>
+                <Td>{user.phone}</Td>
+              </Tr>
+            ))
+          )}
         </Tbody>
       </Table>
     </TableContainer>
