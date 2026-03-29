@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import useUsersStore from "../stores/userQueryStore";
 import EmptyState from "./EmptyState";
+import { isUsersEmpty } from "../utils/helpers";
 
 interface Props {
   users: User[];
@@ -21,7 +22,7 @@ function DesktopTable({ users }: Props) {
   const navigate = useNavigate();
   const search = useUsersStore((selector) => selector.search);
 
-  const isEmpty = users.length === 0;
+  const isEmpty = isUsersEmpty(users);
 
   return (
     <TableContainer overflowX="auto">

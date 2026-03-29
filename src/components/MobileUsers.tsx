@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { User } from "../entities/User";
 import useUsersStore from "../stores/userQueryStore";
 import EmptyState from "./EmptyState";
+import { isUsersEmpty } from "../utils/helpers";
 
 interface Props {
   users: User[];
@@ -13,7 +14,7 @@ function MobileUsers({ users }: Props) {
   const bg = useColorModeValue("white", "gray.800");
   const search = useUsersStore((selector) => selector.search);
 
-  const isEmpty = users.length === 0;
+  const isEmpty = isUsersEmpty(users);
 
   return (
     <VStack spacing={3} align={"stretch"}>

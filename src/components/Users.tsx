@@ -1,8 +1,8 @@
-import { useBreakpointValue } from "@chakra-ui/react";
 import type { User } from "../entities/User";
 import MobileUsers from "./MobileUsers";
 import DesktopTable from "./DesktopTable";
 import Pagination from "./Pagination";
+import useMobile from "../hooks/useMobile";
 
 interface Props {
   users: User[];
@@ -10,7 +10,7 @@ interface Props {
 }
 
 function Users({ users, totalPages }: Props) {
-  const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
+  const isMobile = useMobile();
 
   return (
     <>

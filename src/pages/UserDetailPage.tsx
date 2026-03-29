@@ -9,7 +9,6 @@ import {
   Thead,
   Tr,
   Td,
-  useBreakpointValue,
   Box,
   Avatar,
   Text,
@@ -18,12 +17,13 @@ import {
   Divider,
   HStack,
 } from "@chakra-ui/react";
+import useMobile from "../hooks/useMobile";
 
 function UserDetailPage() {
   const { id } = useParams();
   const { data: user, isLoading, error } = useUserDetail(Number(id));
 
-  const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
+  const isMobile = useMobile();
   const bg = useColorModeValue("white", "gray.800");
   const labelColor = useColorModeValue("gray.500", "gray.400");
 
