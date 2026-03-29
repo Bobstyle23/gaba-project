@@ -31,7 +31,14 @@ function UserDetailPage() {
   if (error) throw error;
 
   return isMobile ? (
-    <Box p={4} borderRadius="xl" bg={bg} shadow="md" borderWidth="1px">
+    <Box
+      p={4}
+      margin={2}
+      borderRadius="lg"
+      bg={bg}
+      shadow="sm"
+      borderWidth="1px"
+    >
       <VStack align="stretch" spacing={4}>
         <HStack spacing={4}>
           <Avatar name={user?.firstName} src={user?.image} size="lg" />
