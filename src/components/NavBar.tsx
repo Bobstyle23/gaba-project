@@ -4,7 +4,7 @@ import ThemeSwitch from "./ThemeSwitch";
 
 function NavBar() {
   return (
-    <HStack justifyContent={"space-between"} padding="12px">
+    <HStack padding="12px">
       <Search />
       <ThemeSwitch />
     </HStack>
