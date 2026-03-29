@@ -21,9 +21,12 @@ interface Props {
 function Users({ users, totalPages }: Props) {
   const navigate = useNavigate();
 
+  const search = useUsersStore((selector) => selector.search);
   const page = useUsersStore((selector) => selector.page);
   const nextPage = useUsersStore((selector) => selector.nextPage);
   const prevPage = useUsersStore((selector) => selector.prevPage);
+
+  const isEmpty = users.length === 0;
 
   return (
     <>
@@ -39,21 +42,31 @@ function Users({ users, totalPages }: Props) {
             </Tr>
           </Thead>
           <Tbody>
-            {users.map((user) => (
-              <Tr
-                key={user.id}
-                onClick={() => navigate(`/users/${user.id}`)}
-                _hover={{ cursor: "pointer" }}
-              >
-                <Td display={{ base: "none", md: "table-cell" }}>{user.id}</Td>
-                <Td>{user.firstName}</Td>
-                <Td>{user.lastName}</Td>
-                <Td display={{ base: "none", md: "table-cell" }}>
-                  {user.email}
+            {isEmpty ? (
+              <Tr>
+                <Td colSpan={5} textAlign={"center"}>
+                  {search ? `No results for "${search}"` : "No users available"}
                 </Td>
-                <Td>{user.phone}</Td>
               </Tr>
-            ))}
+            ) : (
+              users.map((user) => (
+                <Tr
+                  key={user.id}
+                  onClick={() => navigate(`/users/${user.id}`)}
+                  _hover={{ cursor: "pointer" }}
+                >
+                  <Td display={{ base: "none", md: "table-cell" }}>
+                    {user.id}
+                  </Td>
+                  <Td>{user.firstName}</Td>
+                  <Td>{user.lastName}</Td>
+                  <Td display={{ base: "none", md: "table-cell" }}>
+                    {user.email}
+                  </Td>
+                  <Td>{user.phone}</Td>
+                </Tr>
+              ))
+            )}
           </Tbody>
         </Table>
       </TableContainer>
