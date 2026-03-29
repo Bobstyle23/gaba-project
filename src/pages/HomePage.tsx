@@ -2,12 +2,14 @@ import { Box, Grid, GridItem, Spinner } from "@chakra-ui/react";
 import Users from "../components/Users";
 import useUsers, { LIMIT } from "../hooks/useUsers";
 import useUsersStore from "../stores/userQueryStore";
+import useDebounce from "../hooks/useDebounce";
 
 function HomePage() {
-  const { page, search } = useUsersStore();
-  // const [page, setPage] = useState<number>(1);
+  const page = useUsersStore((selector) => selector.page);
+  const search = useUsersStore((selector) => selector.search);
+  const debouncedSearch = useDebounce(search, 500);
 
-  const { data, isLoading, error } = useUsers(page, search);
+  const { data, isLoading, error } = useUsers(page, debouncedSearch);
 
   if (isLoading) return <Spinner margin={5} />;
   if (error) throw error;
